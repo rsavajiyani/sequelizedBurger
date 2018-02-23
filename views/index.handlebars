@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">EAT DA BURGER</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <h3>Uneaten Burgers</h3>
+            <ul>
+                {{#each burger}} {{#unless this.devoured}}
+                <li>
+                    {{this.id}}. {{this.burger_name}}
+                </li>
+                {{!-- This form navigates to /burgers/update, calls the POST method
+                Captures the burger's id from the SQL database, stores it in burger_id --}}
+                <form method="POST" action="/burgers/update" class="button-size">
+                    <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                    <button type="submit" class="btn btn-default">DEVOUR IT</button>
+                </form>
+                {{/unless}} {{/each}}
+            </ul>
+        </div>
+        <div class="col">
+            <h3 class="text-muted">Eaten Burgers</h3>
+            {{!-- Lists the burgers if the devoured boolean value is true/1 --}}
+            <ul>
+                {{#each burger}} {{#if this.devoured}}
+                <li>
+                    <h5 class=>{{this.id}}. {{this.burger_name}}</h5>
+                </li>
+                {{/if}} {{/each}}
+            </ul>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            {{!-- This form calls the POST method in /burgers/create and sends burger_name to burgers_controller.js --}}
+            <burgers_controller></burgers_controller>
+            <form method="POST" action="/burgers/create">
+                <input type="text" name="burger_name" class="form-control" value="" id="enter_text">
+                <button type="submit" class="btn btn-primary" id="text-enter-button">SUBMIT</button>
+                <h5 class="text-center">Submit A Burger You'd Like To Eat</h5>
+            </form>
+
+        </div>
+    </div>
+</div>
+<footer class="page-footer blue center">
+    <div class="container-text-center">
+        <div class="footer-copyright">
+            <div class="container-fluid mainFont">
+                
+                <a href="https://github.com/rsavajiyani/sequelizedBurger" target="_blank"> GitHub
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/rsavajiyani/" target="_blank"> LinkedIn
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                © 2018 Ravi Savajiyani
+            </div>
+        </div>
+
+        <br>
+        <br>
+    </div>
+</footer>
