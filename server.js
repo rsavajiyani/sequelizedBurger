@@ -4,6 +4,8 @@ var exphbs = require('express-handlebars');
 var db = require("./models");
 
 var app = express();
+
+var port = process.env.PORT || 3000;
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
     extended: false
@@ -22,7 +24,7 @@ app.use('/', routes);
 app.use("/update", routes);
 app.use("/create", routes);
 
-var port = process.env.PORT || 3000;
+
 db.sequelize.sync().then(function(){
     app.listen(port);
     console.log("listening on port:" + port);
